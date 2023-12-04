@@ -1,21 +1,35 @@
 ﻿namespace AdventOfCode2023
 {
-    public abstract class SolutionBase(string day, string name)
+    public abstract class SolutionBase
     {
-        public abstract int Day { get; }
-        public abstract string Name { get; }
-        public abstract bool Input { get; }
-        public abstract string Part1Solution(string input);
-        public abstract string Part2Solution(string input);
+        public int Day { get; set; }
+        public string Name { get; set; }
+        public string Input { get; set; }
+        public string Part1Solution { get; set; } = "Not solved yet";
+        public string Part2Solution { get; set; } = "Not solved yet";
 
-        
-        
+        protected SolutionBase(int day, string name, string inputFileName = "input.txt")
+        {
+            Day = day;
+            Name = name;
+            Input = ReadInput(inputFileName);
+        }
+
         public abstract void Solve();
 
         public string ReadInput(string fileName)
         {
-            var path = Path.Combine(Environment.CurrentDirectory, "Day" + Day.ToString(), fileName);
-            return File.ReadAllText(path);
+            try
+            {
+                var path = Path.Combine(Environment.CurrentDirectory, "Day" + Day.ToString(), fileName);
+                Console.WriteLine($"Reading input from {path}");    
+                return File.ReadAllText(path);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading input file: {ex.Message}");
+                return string.Empty;
+            }
         }
 
         public void ShowSolution()
