@@ -34,11 +34,6 @@
             }
         }
 
-        public string[] GetInputLines()
-        {
-            return Input.Split("\n", StringSplitOptions.RemoveEmptyEntries);
-        }
-
         public void ShowSolution()
         {
             Solve();
