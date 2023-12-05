@@ -15,7 +15,7 @@ namespace AdventOfCode2023Tests
             var day1 = new Day1Solution();
 
             // Act
-            var actual = day1.GetCalibrationValue(inputLine);
+            var actual = Day1Solution.GetCalibrationValue(inputLine);
 
             // Assert
             Assert.Equal(expected, actual);

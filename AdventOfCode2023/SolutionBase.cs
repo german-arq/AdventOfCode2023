@@ -4,7 +4,7 @@
     {
         public int Day { get; set; }
         public string Name { get; set; }
-        public string Input { get; set; }
+        public string[] Input { get; set; }
         public string Part1Solution { get; set; } = "Not solved yet";
         public string Part2Solution { get; set; } = "Not solved yet";
 
@@ -17,19 +17,26 @@
 
         public abstract void Solve();
 
-        public string ReadInput(string fileName)
+        public string[] ReadInput(string fileName)
         {
             try
             {
                 var path = Path.Combine(Environment.CurrentDirectory, "Day" + Day.ToString(), fileName);
                 Console.WriteLine($"Reading input from {path}");    
-                return File.ReadAllText(path);
+                var allinput = File.ReadAllText(path);
+                var inputLines = allinput.Split("\n", StringSplitOptions.RemoveEmptyEntries);
+                return inputLines;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading input file: {ex.Message}");
-                return string.Empty;
+                return [];
             }
+        }
+
+        public string[] GetInputLines()
+        {
+            return Input.Split("\n", StringSplitOptions.RemoveEmptyEntries);
         }
 
         public void ShowSolution()

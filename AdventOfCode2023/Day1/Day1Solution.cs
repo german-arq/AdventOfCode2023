@@ -1,36 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdventOfCode2023.Day1
+﻿namespace AdventOfCode2023.Day1
 {
     public class Day1Solution () : SolutionBase (1, "Trebuchet?!")
     {
+        public string[] DigitsAsWords = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
         public override void Solve()
-        {
-            var inputLines = Input.Split("\n", StringSplitOptions.RemoveEmptyEntries);
-            
+        {            
             // Part 1
-            var calibrationValuesSum = inputLines.Select(GetCalibrationValue).Sum();
+            var calibrationValuesSum = Input.Select(GetCalibrationValue).Sum();
             Part1Solution = calibrationValuesSum.ToString();
 
             // Part 2
-            var calibrationValuesSumIncludingDigitsAsWords = inputLines.Select(GetCalibrationValueIncludingDigitsAsWords).Sum();
+            var calibrationValuesSumIncludingDigitsAsWords = Input.Select(GetCalibrationValueIncludingDigitsAsWords).Sum();
             Part2Solution = calibrationValuesSumIncludingDigitsAsWords.ToString();
 
         }
 
-        public int GetCalibrationValue(string inputLine)
+        public static int GetCalibrationValue(string inputLine)
         {
             var firstDigit = inputLine.First(x => char.IsDigit(x));
             var lastDigit = inputLine.Last(x => char.IsDigit(x));
 
             return int.Parse(firstDigit.ToString() + lastDigit.ToString());
         }
-
-        public string[] DigitsAsWords = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
 
         public int GetCalibrationValueIncludingDigitsAsWords(string inputLine)
         {
@@ -65,7 +56,7 @@ namespace AdventOfCode2023.Day1
             return int.Parse(firstDigit.ToString() + lastDigit.ToString());
         }
 
-        public int GetDigitFromWord(string word)
+        public static int GetDigitFromWord(string word)
         {
             return (int)Enum.Parse(typeof(DigitsAsWords), word);
         }
