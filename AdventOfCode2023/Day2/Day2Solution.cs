@@ -10,10 +10,16 @@ namespace AdventOfCode2023.Day2
     {
         private readonly GameSet ACTUAL_CUBES = new(Red:12, Green:13, Blue:14);
         public override void Solve()
-        {            
+        {
+            // Part 1
             var games = Input.Select(Game.FromString).ToList();
             var sumOfPossibleGames = games.Where(g => g.IsPossibleGame(ACTUAL_CUBES)).Sum(g => g.Id);
             Part1Solution = $"{sumOfPossibleGames}";
+
+            // Part 2
+            var fewestCubesNeededForMakeItPossible = games.Select(g => g.FewestCubesNeededForMakeItPossible()).ToList();
+            var powerOfCubesNeededForMakeItPossible = fewestCubesNeededForMakeItPossible.Sum(g => g.Power);
+            Part2Solution = $"{powerOfCubesNeededForMakeItPossible}";
         }
     }
 
@@ -27,6 +33,15 @@ namespace AdventOfCode2023.Day2
         }
 
         public bool IsPossibleGame(GameSet actualCubes) => GameSets.All(actualCubes.CouldContain);
+
+        public GameSet FewestCubesNeededForMakeItPossible()
+        {
+            var blueCubesNeeded = GameSets.Max(gs => gs.Blue);
+            var redCubesNeeded = GameSets.Max(gs => gs.Red);
+            var greenCubesNeeded = GameSets.Max(gs => gs.Green);
+
+            return new GameSet(Blue: blueCubesNeeded, Red: redCubesNeeded, Green: greenCubesNeeded);
+        }      
     }
 
     public record GameSet(int Blue = 0, int Red = 0, int Green = 0)
@@ -44,12 +59,12 @@ namespace AdventOfCode2023.Day2
             {
                 var number = part.Trim().Split(" ")[0].Trim();
                 var colorString = part.Trim().Split()[1].Trim();
-                
+
                 if (!int.TryParse(number, out var _))
                 {
                     throw new ArgumentException($"Invalid input: {input}");
                 }
-                
+
                 _ = colorString switch
                 {
                     "blue" => gameSet.Blue = int.Parse(number),
@@ -66,5 +81,7 @@ namespace AdventOfCode2023.Day2
         {
             return Blue >= another.Blue && Red >= another.Red && Green >= another.Green;
         }
+
+        public int Power => Blue * Red * Green;
     }
 }
