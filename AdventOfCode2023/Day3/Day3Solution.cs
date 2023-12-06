@@ -38,9 +38,7 @@ namespace AdventOfCode2023.Day3
                     var adjacentCharacters = GetAdjancentCharacters(line, previousLine, nextLine, startIndex, endIndex);
 
                     if (adjacentCharacters.Any(IsSymbol))
-                    {
                         partNumbers.Add(number.number);
-                    }
                 }
             }
             return partNumbers;
@@ -105,8 +103,6 @@ namespace AdventOfCode2023.Day3
             return gearRatio;
         }
 
-
-
         public static bool IsSymbol(char character) => !char.IsDigit(character) && character != '.';
 
         public static string GetAdjancentCharacters(string line, string previousLine, string nextLine, int startIndex, int endIndex)
@@ -141,9 +137,7 @@ namespace AdventOfCode2023.Day3
                 }
             }
             if(currentNumber != "")
-            {
                 result.Add((input.Length - currentNumber.Length, int.Parse(currentNumber)));
-            }
 
             return result;
         }
@@ -155,9 +149,7 @@ namespace AdventOfCode2023.Day3
             {
                 var character = input[i];
                 if (character == '*')
-                {
                     result.Add(i);
-                }
             }
             return result;
         }
@@ -169,25 +161,17 @@ namespace AdventOfCode2023.Day3
             {
                 var character = input[i];
                 if (char.IsDigit(character))
-                {
                     number = number.Insert(0, character.ToString());
-                }
                 else
-                {
                     break;
-                }
             }
             for (var i = index+1; i < input.Length; i++)
             {
                 var character = input[i];
                 if (char.IsDigit(character))
-                {
                     number += character;
-                }
                 else
-                {
                     break;
-                }
             }
             return int.Parse(number);
         }
