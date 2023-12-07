@@ -2,6 +2,7 @@
 using AdventOfCode2023.Day2;
 using AdventOfCode2023.Day3;
 using AdventOfCode2023.Day4;
+using AdventOfCode2023.Day5;
 
 namespace AdventOfCode2023
 {
@@ -27,6 +28,7 @@ namespace AdventOfCode2023
                     "2" => (Action)(() => { new Day2Solution().ShowSolution(); }),
                     "3" => (Action)(() => { new Day3Solution().ShowSolution(); }),
                     "4" => (Action)(() => { new Day4Solution().ShowSolution(); }),
+                    "5" => (Action)(() => { new Day5Solution().ShowSolution(); }),
                     "exit" => () => isRunning = false,
                     _ => () => Console.WriteLine("Invalid input")
                 };
